@@ -66,7 +66,7 @@ export class GithubSearchComponent implements OnInit {
       },
         err => {
           // debugger
-
+          this.data = null
           this.failOpenSnackBar(' An error occurred', '');
           this.dataLoading = false
 
@@ -91,6 +91,7 @@ export class GithubSearchComponent implements OnInit {
 
       },
         err => {
+          this.userData=null
           this.failOpenSnackBar(' An error occurred', '');
           this.dataLoading = false
 

@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div *ngIf="!dataLoading" class="search">
-                <div class="search-result" *ngIf="type == 'Users' && searchText != '' && total_count!= 0">
+                <div class="search-result" *ngIf="type == 'Users' && searchText != '' && total_count!= 0 && userData">
                     <div class="card-result" *ngFor="let info of userData.items">
                         <div class="grid-card">
                             <!-- <div class="photo"> -->
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="search-result" *ngIf="type == 'Repositories' && searchText != '' && total_count!= 0">
+                <div class="search-result" *ngIf="type == 'Repositories' && searchText != '' && total_count!= 0 && data">
                     <div class="card-result" *ngFor="let repInfo of data.items">
                         <div class="grid-card">
                             <!-- <div class="photo"> -->

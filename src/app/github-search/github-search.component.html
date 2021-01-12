@@ -1,0 +1,70 @@
+<div class="grid-container">
+    <form [formGroup]="formData" class="form">
+        <div class="card">
+            <div class="search">
+                <div [ngClass]="searchText.length < 3 ?'img-size':'img-size-normal'">
+                    <img class="git-logo" src="assets/img/github_Logo.png">
+                </div>
+                <div [ngClass]="searchText.length < 3 ?'paragraph':'paragraph-normal'">
+                    <p class="header-one">GitHub Searcher</p>
+                    <p class="header-two">Search user or repositories below</p>
+                </div>
+                <div [ngClass]="searchText.length < 3 ?'search-input-div':'search-input-div-normal'">
+                    <input type="text" class="search-input" formControlName="title"
+                        placeholder="Start typing to search .." (keyup)="search()">
+                </div>
+                <mat-form-field [ngClass]="searchText.length < 3 ?'drop-down':'drop-down-normal'" appearance="fill">
+                    <!-- <mat-label>Cars</mat-label> -->
+                    <select matNativeControl formControlName="type">
+                        <option value="Users">Users</option>
+                        <option value="Repositories">Repositories</option>
+                    </select>
+                </mat-form-field>
+
+            </div>
+            <div class="search mg-t-50" *ngIf="dataLoading && searchText.length > 2">
+                <div class="spinner">
+                    <mat-spinner></mat-spinner>
+                </div>
+            </div>
+            <div *ngIf="!dataLoading" class="search">
+                <div class="search-result" *ngIf="type == 'Users' && searchText != '' && total_count!= 0">
+                    <div class="card-result" *ngFor="let info of userData.items">
+                        <div class="grid-card">
+                            <!-- <div class="photo"> -->
+                            <img class="photo" src={{info.avatar_url}}>
+                            <p class="user-name">{{info.login}}</p>
+                            <p class="profile-url">ProfileUrl: {{info.html_url}}</p>
+                            <p class="profile-url">RepositryUrl: {{info.repos_url}}</p>
+
+                            <p class="profile-url">starUrl: {{info.starred_url}}</p>
+
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="search-result" *ngIf="type == 'Repositories' && searchText != '' && total_count!= 0">
+                    <div class="card-result" *ngFor="let repInfo of data.items">
+                        <div class="grid-card">
+                            <!-- <div class="photo"> -->
+                            <img class="photo" src={{repInfo.owner.avatar_url}}>
+                            <p class="user-name">{{repInfo.full_name}}</p>
+                            <p class="profile-url"> {{repInfo.description}}</p>
+                            <p class="profile-url">RepositryUrl: {{repInfo.html_url}}</p>
+
+
+                            <!-- <p class="profile-url">RepositryUrl: {{info.repos_url}}</p>
+
+                            <p class="profile-url">staruUl: {{info.starred_url}}</p> -->
+
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="no-data" *ngIf="total_count== 0 && searchText != ''">
+                    <P>No Data Found</P>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
